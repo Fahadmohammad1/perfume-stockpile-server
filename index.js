@@ -33,16 +33,24 @@ async function run() {
       const query = { _id: ObjectId(id) };
       const perfume = await perfumeCollection.findOne(query);
       res.send(perfume);
-      console.log(perfume);
+    });
+
+    app.put("/perfume/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: ObjectId(id) };
+
+      const updateDoc = {
+        $set: {
+          quantity: req.body.newQuantity,
+        },
+      };
+      const result = await perfumeCollection.updateOne(filter, updateDoc);
+      res.send(result);
     });
   } finally {
   }
 }
 run().catch(console.dir);
-
-app.get("/", (req, res) => {
-  res.send("hey iam running");
-});
 
 app.listen(port, () => {
   console.log("listening", port);
