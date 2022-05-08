@@ -28,6 +28,7 @@ async function run() {
       res.send(perfumes);
     });
 
+    // ruducing quantity
     app.get("/perfume/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
@@ -35,6 +36,7 @@ async function run() {
       res.send(perfume);
     });
 
+    // update stock
     app.put("/perfume/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
@@ -45,6 +47,14 @@ async function run() {
         },
       };
       const result = await perfumeCollection.updateOne(filter, updateDoc);
+      res.send(result);
+    });
+
+    // delete item
+    app.delete("/item/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await perfumeCollection.deleteOne(query);
       res.send(result);
     });
   } finally {
