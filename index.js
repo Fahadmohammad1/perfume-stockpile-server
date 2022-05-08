@@ -33,6 +33,7 @@ async function run() {
       const query = { _id: ObjectId(id) };
       const perfume = await perfumeCollection.findOne(query);
       res.send(perfume);
+      console.log(perfume);
     });
   } finally {
   }
