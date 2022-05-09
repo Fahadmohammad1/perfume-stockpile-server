@@ -64,6 +64,15 @@ async function run() {
       const result = await perfumeCollection.insertOne(newItem);
       res.send(result);
     });
+
+    app.get("/myItems", async (req, res) => {
+      const email = req.query.email;
+
+      const query = { email: email };
+      const cursor = perfumeCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
   } finally {
   }
 }
