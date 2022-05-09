@@ -57,6 +57,13 @@ async function run() {
       const result = await perfumeCollection.deleteOne(query);
       res.send(result);
     });
+
+    // post item
+    app.post("/perfume", async (req, res) => {
+      const newItem = req.body;
+      const result = await perfumeCollection.insertOne(newItem);
+      res.send(result);
+    });
   } finally {
   }
 }
