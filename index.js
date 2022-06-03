@@ -39,6 +39,7 @@ async function run() {
     // update stock
     app.put("/perfume/:id", async (req, res) => {
       const id = req.params.id;
+      console.log(req.body);
       const filter = { _id: ObjectId(id) };
 
       const updateDoc = {
